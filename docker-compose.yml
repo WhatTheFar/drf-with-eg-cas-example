@@ -1,0 +1,24 @@
+version: '3.6'
+
+services:
+  db:
+    container_name: db
+    image: postgres:10.4
+    port:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=Password
+      - POSTGRES_DB=test
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - ./docker_volume_pgdata:/var/lib/postgresql/dat
+
+  cat:
+    container_name: cat
+      ports:
+        - 8000:8000
+      image: c0d1um/herotrack:backend
+      depends_on:
+        - db
+      environment:
+        - DATABASE_URL=postgres://postgres:Password@db:5432/test

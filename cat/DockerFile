@@ -1,0 +1,20 @@
+FROM python:3.6
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update
+
+# Location of source code
+ENV PROJECT_ROOT /opt/app
+RUN mkdir -p $PROJECT_ROOT
+WORKDIR $PROJECT_ROOT
+
+# Copying requirements
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copying manage.py file
+COPY ./backend/manage.py .
+
+# Copying source files
+COPY ./backend/cat ./cat
+COPY ./backend/hello ./hello
