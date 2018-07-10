@@ -35,7 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mama_cas',
+    'hello.apps.HelloConfig',
+    'rest_framework',
+    'rest_auth',
+    # 'mama_cas',
 ]
 
 MIDDLEWARE = [
@@ -114,23 +117,41 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MAMA_CAS_ENABLE_SINGLE_SIGN_OUT = True
+# MAMA_CAS_ENABLE_SINGLE_SIGN_OUT = True
 
-MAMA_CAS_SERVICES = [
-    {
-        'SERVICE': 'http://dog:8000',
-        'CALLBACKS': [
-            'mama_cas.callbacks.user_name_attributes',
-        ],
-        'LOGOUT_ALLOW': True,
-        'LOGOUT_URL': 'http:/dog/accounts/callback',
-    },
-    {
-        'SERVICE': 'http://cat:8000',
-        'CALLBACKS': [
-            'mama_cas.callbacks.user_name_attributes',
-        ],
-        'LOGOUT_ALLOW': True,
-        'LOGOUT_URL': 'http://cat:8000/accounts/callback',
-    },
- ]
+# MAMA_CAS_SERVICES = [
+#     {
+#         'SERVICE': 'http://dog:8000',
+#         'CALLBACKS': [
+#             'mama_cas.callbacks.user_name_attributes',
+#         ],
+#         'LOGOUT_ALLOW': True,
+#         'LOGOUT_URL': 'http:/dog/accounts/callback',
+#     },
+#     {
+#         'SERVICE': 'http://cat:8000',
+#         'CALLBACKS': [
+#             'mama_cas.callbacks.user_name_attributes',
+#         ],
+#         'LOGOUT_ALLOW': True,
+#         'LOGOUT_URL': 'http://cat:8000/accounts/callback',
+#     },
+#  ]
+
+# For using JWT in rest_auth
+REST_USE_JWT = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer'
+}
