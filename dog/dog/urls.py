@@ -19,7 +19,7 @@ from django.conf.urls import include, url
 # import django_cas_ng.views as cas_views
 
 urlpatterns = [
-    url(r'^', include('hello.urls')),
+    url(r'dog/api/', include('hello.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     # url(r'^accounts/login$', cas_views.login, name='cas_ng_login'),

@@ -19,7 +19,7 @@ from django.conf.urls import include, url
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 urlpatterns = [
-    url(r'^', include('hello.urls')),
+    url(r'^cat/api/', include('hello.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     url(r'^api-token-auth/', obtain_jwt_token),
