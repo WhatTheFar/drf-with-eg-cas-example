@@ -15,8 +15,7 @@ services:
   gateway:
     container_name: gateway
     build:
-      context: .
-      dockerfile: DockerFileGateway
+      context: ./gateway
     ports:
       - 3000:8080
     volumes: 
@@ -25,13 +24,15 @@ services:
       - user_db
     environment: 
       DATABASE_URL: postgres://postgres:password@user_db:5432/postgres
+      AUTH_HEADER: 'auth-user'
+      JWT_SECRET: 'this_is_a_secret_from_docker_compose'
+      ADMIN_KEY: 'this_is_an_admin_api_key'
     command: sh -c 'npm install && LOG_LEVEL=debug node server.js'
 
   cat:
     container_name: cat
     build:
-      context: .
-      dockerfile: DockerFileCat
+      context: ./cat
     ports:
       - 8000:8000
     volumes:
@@ -41,8 +42,7 @@ services:
   dog:
     container_name: dog
     build:
-      context: .
-      dockerfile: DockerFileDog
+      context: ./dog
     ports:
       - 8001:8000
     volumes:
