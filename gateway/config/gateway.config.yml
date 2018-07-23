@@ -9,13 +9,13 @@ apiEndpoints:
     paths: '/static/rest_framework/*'
   cat:
     host: localhost
-    paths: '/cat/*'
+    paths: '/cat/api/*'
   api-auth:
     host: localhost
     paths: '/api-auth/*'
   dog:
     host: localhost
-    paths: '/dog/*'
+    paths: '/dog/api/*'
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
@@ -62,7 +62,7 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: dog
-              # changeOrigin: true
+              changeOrigin: false
   cat:
     apiEndpoints:
       - cat
