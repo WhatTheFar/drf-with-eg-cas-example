@@ -48,11 +48,13 @@ pipelines:
   dog:
     apiEndpoints:
       - dog
+      - api-auth
     policies:
       # - cors:
       #     - action:
       #         origin: '*'
       - auth-secure:
+      - session-auth:
       - basic-auth:
           - action:
               passThrough: true
@@ -66,11 +68,18 @@ pipelines:
   cat:
     apiEndpoints:
       - cat
-      - api-auth
     policies:
       # - cors:
       #     - action:
       #         origin: '*'
+      - auth-secure:
+      - session-auth:
+      - basic-auth:
+          - action:
+              passThrough: true
+      - jwt-auth:
+          - action:
+              passThrough: true
       - proxy:
           - action:
               serviceEndpoint: cat
