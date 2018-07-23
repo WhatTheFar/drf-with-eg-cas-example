@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
-import django_cas_ng.views as cas_views
+# import django_cas_ng.views as cas_views
 
 urlpatterns = [
     url(r'^', include('hello.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    url(r'^accounts/login$', cas_views.login, name='cas_ng_login'),
-    url(r'^accounts/logout$', cas_views.logout, name='cas_ng_logout'),
-    url(r'^accounts/callback$', cas_views.callback, name='cas_ng_proxy_callback'),
+    # url(r'^accounts/login$', cas_views.login, name='cas_ng_login'),
+    # url(r'^accounts/logout$', cas_views.logout, name='cas_ng_logout'),
+    # url(r'^accounts/callback$', cas_views.callback, name='cas_ng_proxy_callback'),
 ]

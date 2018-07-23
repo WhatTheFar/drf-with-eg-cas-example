@@ -24,7 +24,7 @@ SECRET_KEY = 'fs$2jxz(r0rdvr)w^b-)w5$0g1o&aa6-q1s3s+bn7jsc74esjm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'dog']
 
 # Application definition
 
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'hello.apps.HelloConfig',
-    'django_cas_ng',
 ]
 
 MIDDLEWARE = [
@@ -51,12 +50,9 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
 )
-
-CAS_SERVER_URL = 'http://cas:8000'
-CAS_VERSION = '3'
 
 ROOT_URLCONF = 'dog.urls'
 
@@ -129,7 +125,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dog.authentication.CustomHeaderAuthentication',
+        # 'rest_framework.authentication.RemoteUserAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ),
 }

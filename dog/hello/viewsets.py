@@ -6,6 +6,6 @@ from hello.serializers import DogSerializer
 
 
 class DogViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = DogSerializer
     queryset = Dog.objects.all()
