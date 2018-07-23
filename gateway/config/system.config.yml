@@ -6,7 +6,7 @@ db:
 
 #plugins:
   # express-gateway-plugin-example:
-  #   param1: 'param from system.config' 
+  #   param1: 'param from system.config'
 
 crypto:
   cipherKey: sensitiveKey
@@ -24,3 +24,7 @@ refreshTokens:
   timeToExpiry: 7200000
 authorizationCodes:
   timeToExpiry: 300000
+
+plugins:
+  cas:
+    package: express-gateway-plugin-cas

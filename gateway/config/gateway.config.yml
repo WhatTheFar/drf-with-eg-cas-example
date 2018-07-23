@@ -4,14 +4,26 @@ admin:
   port: 9876
   hostname: localhost
 apiEndpoints:
-  api:
+  static_rest:
     host: localhost
-    paths: '/ip'
+    paths: '/static/rest_framework/*'
+  cat:
+    host: localhost
+    paths: '/cat/*'
+  api-auth:
+    host: localhost
+    paths: '/api-auth/*'
+  dog:
+    host: localhost
+    paths: '/dog/*'
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
+  cat:
+    url: 'http://cat:8000'
+  dog:
+    url: 'http://dog:8000'
 policies:
-  - basic-auth
   - cors
   - expression
   - key-auth
@@ -19,14 +31,47 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - jwt-auth
+  - basic-auth
+  - session-auth
+  - local-auth
+  - auth-secure
 pipelines:
-  default:
+  static_rest:
     apiEndpoints:
-      - api
+      - static_rest
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
-              serviceEndpoint: httpbin 
-              changeOrigin: true
+              serviceEndpoint: dog
+              changeOrigin: false
+  dog:
+    apiEndpoints:
+      - dog
+    policies:
+      # - cors:
+      #     - action:
+      #         origin: '*'
+      - auth-secure:
+      - basic-auth:
+          - action:
+              passThrough: true
+      - jwt-auth:
+          - action:
+              passThrough: true
+      - proxy:
+          - action:
+              serviceEndpoint: dog
+              # changeOrigin: true
+  cat:
+    apiEndpoints:
+      - cat
+      - api-auth
+    policies:
+      # - cors:
+      #     - action:
+      #         origin: '*'
+      - proxy:
+          - action:
+              serviceEndpoint: cat
+              changeOrigin: false
