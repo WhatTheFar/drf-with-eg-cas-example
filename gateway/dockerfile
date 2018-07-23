@@ -1,13 +1,14 @@
-FROM python:3.6
-ENV PYTHONUNBUFFERED 1
+FROM node:10.6
 
-RUN apt-get update
+# RUN apt-get update
 
 # Location of source code
 ENV PROJECT_ROOT /opt/app
 RUN mkdir -p $PROJECT_ROOT
 WORKDIR $PROJECT_ROOT
 
+RUN npm install -g express-gateway
+
 # Copying requirements
-COPY ./cat/requirements.txt .
-RUN pip install -r requirements.txt
+COPY ./package.json .
+RUN npm install
