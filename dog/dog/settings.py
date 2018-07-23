@@ -51,7 +51,7 @@ MIDDLEWARE = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
 )
 
 ROOT_URLCONF = 'dog.urls'
@@ -126,8 +126,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dog.authentication.CustomHeaderAuthentication',
-        # 'rest_framework.authentication.RemoteUserAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
