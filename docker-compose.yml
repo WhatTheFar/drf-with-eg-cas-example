@@ -48,14 +48,3 @@ services:
     volumes:
       - ./dog:/opt/app
     command: sh -c 'pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
-
-  auth:
-    container_name: auth
-    build:
-      context: .
-      dockerfile: DockerFileAuth
-    ports:
-      - 8002:8000
-    volumes:
-      - ./auth:/opt/app
-    command: sh -c 'pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
