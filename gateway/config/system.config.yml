@@ -28,3 +28,5 @@ authorizationCodes:
 plugins:
   cas:
     package: express-gateway-plugin-cas
+    DATABASE_URL: ${DATABASE_URL:-}
+    ADMIN_KEY: ${ADMIN_KEY:-}

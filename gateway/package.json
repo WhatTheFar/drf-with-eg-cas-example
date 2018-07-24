@@ -7,6 +7,6 @@
   "main": "server.js",
   "dependencies": {
     "express-gateway": "^1.10.1",
-    "express-gateway-plugin-cas": "^1.0.2"
+    "express-gateway-plugin-cas": "^1.0.6"
   }
 }
